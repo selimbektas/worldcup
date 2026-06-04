@@ -1,4 +1,7 @@
-body{font-family:Arial;max-width:900px;margin:auto;padding:20px;background:#111;color:#fff}
-button{padding:10px 16px;margin:8px}
-.choice{background:#222;padding:8px;margin:6px;cursor:pointer}
-#history div{border-bottom:1px solid #333;padding:4px}
+body{background:#F4F1E8;color:#233142;font-family:Arial}
+.wrap{max-width:1000px;margin:auto;padding:20px}
+.panel{background:#fff;border:1px solid #D7D2C8;padding:15px;border-radius:10px;margin:12px 0}
+button{background:#E67E22;color:white;border:none;padding:10px 16px;border-radius:8px;cursor:pointer}
+.choice{padding:10px;margin:6px 0;background:#f7f7f7;border:1px solid #D7D2C8;cursor:pointer}
+.success{color:#2ECC71;font-weight:bold}
+.fail{color:#E74C3C;font-weight:bold}
