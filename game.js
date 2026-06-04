@@ -1,20 +1,40 @@
 
-const stages = [
-  {name:'GROUP STAGE · MATCH 1', knockout:false},
-  {name:'GROUP STAGE · MATCH 2', knockout:false},
-  {name:'GROUP STAGE · MATCH 3', knockout:false},
-  {name:'ROUND OF 16', knockout:true},
-  {name:'QUARTER FINAL', knockout:true},
-  {name:'SEMI FINAL', knockout:true},
-  {name:'FINAL', knockout:true}
-];
+function getOpponentPool(stage){
+
+  if(stage.includes("GROUP")){
+    return teams.filter(t => ["B","C","D"].includes(t.tier));
+  }
+
+  if(stage === "ROUND OF 16"){
+    return teams.filter(t => ["A","B"].includes(t.tier));
+  }
+
+  if(stage === "QUARTER FINAL"){
+    return teams.filter(t => ["A","S"].includes(t.tier));
+  }
+
+  if(stage === "SEMI FINAL"){
+    return teams.filter(t => t.tier === "S");
+  }
+
+  if(stage === "FINAL"){
+    return teams.filter(t => t.tier === "S");
+  }
+
+  return teams;
+}
 
 function playMatch(teamStrength, oppPower, knockout=false){
 
   const strengthDiff = teamStrength - oppPower;
 
-  let winProb = 0.50 + (strengthDiff / 100);
+  let winProb = 0.45 + (strengthDiff / 120);
   winProb = Math.max(0.15, Math.min(0.85, winProb));
+
+  // upset factor
+  if(Math.random() < 0.05){
+    winProb *= 0.5;
+  }
 
   const roll = Math.random();
 
@@ -28,35 +48,32 @@ function playMatch(teamStrength, oppPower, knockout=false){
     result = "L";
   }
 
-  let gf = 0;
-  let ga = 0;
+  let gf=0, ga=0;
 
-  if(result === "W"){
+  if(result==="W"){
     gf = 1 + Math.floor(Math.random()*4);
     ga = Math.floor(Math.random()*Math.min(3,gf));
   }
 
-  if(result === "D"){
+  if(result==="D"){
     gf = Math.floor(Math.random()*3);
     ga = gf;
   }
 
-  if(result === "L"){
+  if(result==="L"){
     ga = 1 + Math.floor(Math.random()*4);
     gf = Math.floor(Math.random()*Math.min(3,ga));
   }
 
-  if(knockout && result === "D"){
+  if(knockout && result==="D"){
     const pens =
-      Math.random() < (teamStrength / (teamStrength + oppPower));
+      Math.random() <
+      (teamStrength/(teamStrength+oppPower));
 
-    if(pens){
-      result = "W";
-      gf++;
-    }else{
-      result = "L";
-      ga++;
-    }
+    result = pens ? "W" : "L";
+
+    if(pens){ gf++; }
+    else { ga++; }
   }
 
   return {result,gf,ga};
@@ -69,42 +86,42 @@ simBtn.onclick = () => {
 
   let chemistry = 0;
 
-  const teamsUsed = {};
+  const nations = {};
 
   squad.forEach(p=>{
-    teamsUsed[p.team] = (teamsUsed[p.team]||0)+1;
+    nations[p.team] = (nations[p.team]||0)+1;
   });
 
-  Object.values(teamsUsed).forEach(v=>{
-    if(v >= 2) chemistry += (v-1);
+  Object.values(nations).forEach(v=>{
+    if(v>1) chemistry += (v-1);
   });
 
   const teamStrength = overall + chemistry;
 
   let html = "";
   let points = 0;
-  let eliminated = false;
-  let finish = "Champion";
 
-  for(let i=0;i<3;i++){
+  // GROUP STAGE
+  for(let i=1;i<=3;i++){
 
-    const opp = teams[Math.floor(Math.random()*teams.length)];
+    const pool = getOpponentPool("GROUP");
+    const opp = pool[Math.floor(Math.random()*pool.length)];
 
-    const m =
+    const match =
       playMatch(teamStrength, opp.power, false);
 
-    if(m.result==="W") points += 3;
-    if(m.result==="D") points += 1;
+    if(match.result==="W") points += 3;
+    if(match.result==="D") points += 1;
 
-    html += `
-    <div class="match">
-      <div>${stages[i].name}</div>
+    html += `<div class="match">
+      <div>GROUP STAGE · MATCH ${i}</div>
       <div>vs ${opp.name}</div>
-      <div>${m.gf}-${m.ga} ${m.result}</div>
+      <div>${match.gf}-${match.ga} ${match.result}</div>
     </div>`;
   }
 
-  if(points < 5){
+  // harder qualification
+  if(points < 6){
 
     result.innerHTML =
       html +
@@ -116,34 +133,51 @@ simBtn.onclick = () => {
     return;
   }
 
-  for(let i=3;i<stages.length;i++){
+  const rounds = [
+    {name:"ROUND OF 16", penalty:2},
+    {name:"QUARTER FINAL", penalty:4},
+    {name:"SEMI FINAL", penalty:6},
+    {name:"FINAL", penalty:8}
+  ];
 
-    const opp =
-      teams[Math.floor(Math.random()*teams.length)];
+  for(const round of rounds){
 
-    const m =
-      playMatch(teamStrength, opp.power, true);
+    const pool = getOpponentPool(round.name);
+    const opp = pool[Math.floor(Math.random()*pool.length)];
 
-    html += `
-    <div class="match ${m.result==='L'?'loss':''}">
-      <div>${stages[i].name}</div>
+    const effectiveStrength =
+      teamStrength - round.penalty;
+
+    const match =
+      playMatch(
+        effectiveStrength,
+        opp.power,
+        true
+      );
+
+    html += `<div class="match ${match.result==='L'?'loss':''}">
+      <div>${round.name}</div>
       <div>vs ${opp.name}</div>
-      <div>${m.gf}-${m.ga} ${m.result}</div>
+      <div>${match.gf}-${match.ga} ${match.result}</div>
     </div>`;
 
-    if(m.result==="L"){
+    if(match.result==="L"){
 
-      eliminated = true;
-      finish = stages[i].name;
+      result.innerHTML =
+        html +
+        `<hr>
+        <h2>ELIMINATED</h2>
+        <p>Finish: ${round.name}</p>
+        <p>Team Strength: ${teamStrength.toFixed(1)}</p>`;
 
-      break;
+      return;
     }
   }
 
   result.innerHTML =
     html +
     `<hr>
-    <h2>${eliminated ? 'ELIMINATED' : 'WORLD CUP CHAMPION 🏆'}</h2>
+    <h2>WORLD CUP CHAMPION 🏆</h2>
     <p>Team Strength: ${teamStrength.toFixed(1)}</p>
-    <p>Best Finish: ${eliminated ? finish : 'Champion'}</p>`;
+    <p>Difficulty Scaling Enabled</p>`;
 };
