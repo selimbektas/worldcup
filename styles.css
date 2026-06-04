@@ -1,7 +1,1 @@
-body{background:#F4F1E8;color:#233142;font-family:Arial}
-.wrap{max-width:1000px;margin:auto;padding:20px}
-.panel{background:#fff;border:1px solid #D7D2C8;padding:15px;border-radius:10px;margin:12px 0}
-button{background:#E67E22;color:white;border:none;padding:10px 16px;border-radius:8px;cursor:pointer}
-.choice{padding:10px;margin:6px 0;background:#f7f7f7;border:1px solid #D7D2C8;cursor:pointer}
-.success{color:#2ECC71;font-weight:bold}
-.fail{color:#E74C3C;font-weight:bold}
+body{background:#F4F1E8;color:#233142;font-family:Arial}.container{max-width:1000px;margin:auto;padding:20px}.card{background:#fff;border:1px solid #D7D2C8;padding:16px;border-radius:10px;margin:12px 0}.choice{padding:10px;margin:6px 0;border:1px solid #D7D2C8;cursor:pointer}button{background:#E67E22;color:#fff;border:none;padding:12px;border-radius:8px}.match{display:flex;justify-content:space-between;border:1px solid #D7D2C8;padding:10px;margin:6px 0}.loss{background:#111;color:#F4F1E8}

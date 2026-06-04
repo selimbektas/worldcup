@@ -1,58 +1,32 @@
-let roll=0;
-let squad=[];
-let used=new Set();
-let history=[];
 
-const step=document.getElementById('step');
-const draw=document.getElementById('draw');
-const choices=document.getElementById('choices');
-const squadEl=document.getElementById('squad');
-
+const stages=[
+{name:'GROUP STAGE 1',knockout:false},
+{name:'GROUP STAGE 2',knockout:false},
+{name:'GROUP STAGE 3',knockout:false},
+{name:'ROUND OF 16',knockout:true},
+{name:'QUARTER FINAL',knockout:true},
+{name:'SEMI FINAL',knockout:true},
+{name:'FINAL',knockout:true}
+];
+let picks=0,squad=[],used=new Set();
 rollBtn.onclick=()=>{
- if(roll>=11)return;
- const t=teams[Math.floor(Math.random()*teams.length)];
- draw.innerHTML='<h3>'+t.name+'</h3>';
- choices.innerHTML='';
- t.players.filter(p=>!used.has(p[0])).forEach(p=>{
-   const d=document.createElement('div');
-   d.className='choice';
-   d.textContent=p[0]+' ('+p[1]+')';
-   d.onclick=()=>pick(t,p);
-   choices.appendChild(d);
- });
+const team=teams[Math.floor(Math.random()*teams.length)];
+draw.innerHTML='<h3>'+team.name+'</h3>';choices.innerHTML='';
+team.players.filter(p=>!used.has(p[0])).forEach(p=>{
+let d=document.createElement('div');d.className='choice';d.textContent=p[0]+' ('+p[1]+')';
+d.onclick=()=>{used.add(p[0]);squad.push({rating:p[1]});let li=document.createElement('li');li.textContent=p[0]+' - '+team.name;squadEl.appendChild(li);picks++;step.textContent=picks<11?'Roll '+(picks+1)+' / 11':'Squad Complete';draw.innerHTML='';choices.innerHTML='';if(picks===11){rollBtn.disabled=true;simBtn.disabled=false;}};
+choices.appendChild(d);});
 };
-
-function pick(team,p){
- used.add(p[0]);
- squad.push({team:team.name,name:p[0],rating:p[1]});
- const li=document.createElement('li');
- li.textContent=p[0]+' — '+team.name;
- squadEl.appendChild(li);
-
- roll++;
- step.textContent='Roll '+Math.min(roll+1,11)+' / 11';
- draw.innerHTML='';
- choices.innerHTML='';
-
- if(roll===11){
-   rollBtn.disabled=true;
-   simBtn.disabled=false;
-   step.textContent='Squad Complete';
- }
-}
-
 simBtn.onclick=()=>{
- const avg=squad.reduce((a,b)=>a+b.rating,0)/11;
- const opp=teams[Math.floor(Math.random()*teams.length)];
- const goals=Math.max(0,Math.round((avg-opp.power)/2 + 4 + Math.random()*3));
- const against=Math.floor(Math.random()*2);
- const success=goals>=7;
-
- result.innerHTML=`<h2>${goals}-${against}</h2>
- <p>Opponent: ${opp.name}</p>
- <p>${goals}/7 goals</p>
- <p class="${success?'success':'fail'}">${success?'YES, 7-0 CHALLENGE CLEARED':'NO'}</p>`;
-
- history.unshift(`${goals}-${against} vs ${opp.name} (${Math.min(goals,7)}/7)`);
- document.getElementById('history').innerHTML=history.map(x=>'<div>'+x+'</div>').join('');
+let overall=squad.reduce((a,b)=>a+b.rating,0)/squad.length;let html='';let eliminated=false;let finish='Champion';
+for(const s of stages){
+const opp=teams[Math.floor(Math.random()*teams.length)];
+let g=Math.max(0,Math.round(1+(overall-opp.power)/8+Math.random()*3));
+let a=Math.max(0,Math.round(Math.random()*2));
+if(s.knockout && g===a) g++;
+let win=g>a;
+html+=`<div class="match ${win?'':'loss'}"><div>${s.name}</div><div>vs ${opp.name}</div><div>${g}-${a} ${win?'✓':'✗'}</div></div>`;
+if(s.knockout && !win){eliminated=true;finish=s.name;break;}
+}
+result.innerHTML=html+`<hr><h2>${eliminated?'ELIMINATED':'WORLD CUP CHAMPION 🏆'}</h2><p>Best Finish: ${eliminated?finish:'Champion'}</p>`;
 };

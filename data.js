@@ -1,7 +1,1 @@
-const teams=[
-{name:'Germany 2014',power:90,players:[['Neuer',95],['Lahm',94],['Kroos',96],['Muller',95],['Klose',92],['Ozil',90]]},
-{name:'Brazil 2002',power:92,players:[['Ronaldo',100],['Ronaldinho',99],['Rivaldo',98],['Cafu',96],['Roberto Carlos',97]]},
-{name:'France 1998',power:89,players:[['Zidane',99],['Henry',94],['Thuram',95],['Desailly',94]]},
-{name:'Spain 2010',power:91,players:[['Xavi',99],['Iniesta',100],['Villa',97],['Ramos',96]]},
-{name:'Argentina 2022',power:90,players:[['Messi',100],['Di Maria',94],['Alvarez',92],['Martinez',92]]}
-];
+const teams=[{name:'Germany 2014',power:90,players:[['Neuer',95],['Lahm',94],['Kroos',96],['Muller',95],['Klose',92]]},{name:'Brazil 2002',power:92,players:[['Ronaldo',100],['Ronaldinho',99],['Rivaldo',98],['Cafu',96],['Roberto Carlos',97]]},{name:'France 1998',power:89,players:[['Zidane',99],['Henry',94],['Thuram',95],['Desailly',94]]},{name:'Spain 2010',power:91,players:[['Xavi',99],['Iniesta',100],['Villa',97],['Ramos',96]]},{name:'Argentina 2022',power:90,players:[['Messi',100],['Di Maria',94],['Alvarez',92],['Martinez',92]]}];
