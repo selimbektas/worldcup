@@ -1,3 +1,51 @@
+
 const teams = [
-{name:'Brazil 1970',tier:'S',power:98,players:[{name:'Pele',position:'FW',rating:100},{name:'Jairzinho',position:'FW',rating:98},{name:'Rivelino',position:'MF',rating:97},{name:'Carlos Alberto',position:'DF',rating:96}]},{name:'Argentina 1986',tier:'S',power:97,players:[{name:'Maradona',position:'FW',rating:100},{name:'Valdano',position:'FW',rating:92},{name:'Burruchaga',position:'MF',rating:91}]},{name:'Spain 2010',tier:'S',power:96,players:[{name:'Xavi',position:'MF',rating:99},{name:'Iniesta',position:'MF',rating:100},{name:'Villa',position:'FW',rating:97},{name:'Ramos',position:'DF',rating:96}]},{name:'Argentina 2022',tier:'S',power:96,players:[{name:'Messi',position:'FW',rating:100},{name:'Di Maria',position:'FW',rating:94},{name:'Alvarez',position:'FW',rating:92}]},{name:'Brazil 2002',tier:'A',power:92,players:[{name:'Ronaldo',position:'FW',rating:100},{name:'Ronaldinho',position:'FW',rating:99},{name:'Rivaldo',position:'FW',rating:98},{name:'Cafu',position:'DF',rating:96}]},{name:'Germany 2014',tier:'A',power:92,players:[{name:'Neuer',position:'GK',rating:95},{name:'Kroos',position:'MF',rating:96},{name:'Muller',position:'FW',rating:94},{name:'Lahm',position:'DF',rating:94}]},{name:'France 1998',tier:'A',power:91,players:[{name:'Zidane',position:'MF',rating:99},{name:'Henry',position:'FW',rating:94},{name:'Desailly',position:'DF',rating:93}]},{name:'Italy 2006',tier:'A',power:90,players:[{name:'Buffon',position:'GK',rating:96},{name:'Cannavaro',position:'DF',rating:96},{name:'Pirlo',position:'MF',rating:95}]},{name:'Netherlands 1974',tier:'A',power:90,players:[{name:'Cruyff',position:'FW',rating:99},{name:'Neeskens',position:'MF',rating:93}]},{name:'France 2018',tier:'A',power:91,players:[{name:'Mbappe',position:'FW',rating:98},{name:'Griezmann',position:'FW',rating:93},{name:'Kante',position:'MF',rating:94}]},{name:'England 1990',tier:'B',power:85,players:[{name:'Lineker',position:'FW',rating:90},{name:'Gascoigne',position:'MF',rating:89}]},{name:'Portugal 2006',tier:'B',power:86,players:[{name:'Figo',position:'FW',rating:92},{name:'Deco',position:'MF',rating:89},{name:'Cristiano Ronaldo',position:'FW',rating:91}]},{name:'Belgium 2018',tier:'B',power:87,players:[{name:'De Bruyne',position:'MF',rating:96},{name:'Hazard',position:'FW',rating:92},{name:'Lukaku',position:'FW',rating:91}]},{name:'Croatia 1998',tier:'B',power:86,players:[{name:'Suker',position:'FW',rating:90},{name:'Boban',position:'MF',rating:87}]},{name:'Turkey 2002',tier:'B',power:84,players:[{name:'Sukur',position:'FW',rating:86},{name:'Basturk',position:'MF',rating:84}]},{name:'Sweden 1994',tier:'B',power:85,players:[{name:'Brolin',position:'FW',rating:88},{name:'Dahlin',position:'FW',rating:86}]},{name:'Romania 1994',tier:'B',power:85,players:[{name:'Hagi',position:'MF',rating:93},{name:'Dumitrescu',position:'FW',rating:86}]},{name:'Denmark 1998',tier:'B',power:84,players:[{name:'Laudrup',position:'FW',rating:90},{name:'Sand',position:'FW',rating:83}]},{name:'Mexico 1986',tier:'B',power:84,players:[{name:'Hugo Sanchez',position:'FW',rating:89},{name:'Negrete',position:'MF',rating:86}]},{name:'USA 2002',tier:'B',power:84,players:[{name:'Donovan',position:'FW',rating:85},{name:'Reyna',position:'MF',rating:84}]},{name:'South Korea 2002',tier:'B',power:85,players:[{name:'Park Ji-sung',position:'MF',rating:88},{name:'Ahn',position:'FW',rating:84}]},{name:'Japan 2002',tier:'C',power:78,players:[{name:'Nakata',position:'MF',rating:83},{name:'Ono',position:'MF',rating:80}]},{name:'Japan 2010',tier:'C',power:79,players:[{name:'Honda',position:'FW',rating:84},{name:'Endo',position:'MF',rating:82}]},{name:'Nigeria 1994',tier:'C',power:79,players:[{name:'Yekini',position:'FW',rating:84},{name:'Amokachi',position:'FW',rating:82}]},{name:'Morocco 2022',tier:'B',power:87,players:[{name:'Hakimi',position:'DF',rating:91},{name:'Ziyech',position:'FW',rating:88}]},{name:'Senegal 2002',tier:'B',power:84,players:[{name:'Diouf',position:'FW',rating:86},{name:'Camara',position:'FW',rating:83}]},{name:'Chile 2010',tier:'B',power:84,players:[{name:'Sanchez',position:'FW',rating:89},{name:'Vidal',position:'MF',rating:88}]},{name:'Colombia 2014',tier:'B',power:86,players:[{name:'James',position:'MF',rating:92},{name:'Cuadrado',position:'FW',rating:86}]},{name:'Ireland 2002',tier:'C',power:78,players:[{name:'Keane',position:'FW',rating:88},{name:'Duff',position:'FW',rating:82}]},{name:'Australia 2006',tier:'C',power:78,players:[{name:'Kewell',position:'FW',rating:84},{name:'Viduka',position:'FW',rating:83}]},{name:'Saudi Arabia 1994',tier:'C',power:76,players:[{name:'Al-Owairan',position:'FW',rating:86},{name:'Al-Jaber',position:'FW',rating:80}]},{name:'China 2002',tier:'D',power:68,players:[{name:'Li Tie',position:'MF',rating:71},{name:'Fan Zhiyi',position:'DF',rating:72}]},{name:'Canada 1986',tier:'D',power:67,players:[{name:'Mitchell',position:'FW',rating:70},{name:'Valentine',position:'MF',rating:68}]},{name:'Bolivia 1994',tier:'D',power:69,players:[{name:'Etcheverry',position:'MF',rating:74},{name:'Sanchez',position:'FW',rating:72}]},{name:'Togo 2006',tier:'D',power:70,players:[{name:'Adebayor',position:'FW',rating:79},{name:'Agassa',position:'GK',rating:68}]},{name:'Zaire 1974',tier:'D',power:62,players:[{name:'Kazadi',position:'GK',rating:66},{name:'Mwepu',position:'MF',rating:65}]},{name:'Qatar 2022',tier:'D',power:68,players:[{name:'Afif',position:'FW',rating:74},{name:'Hassan',position:'FW',rating:70}]},{name:'Panama 2018',tier:'D',power:67,players:[{name:'Perez',position:'FW',rating:71},{name:'Torres',position:'MF',rating:69}]},{name:'North Korea 2010',tier:'D',power:65,players:[{name:'Jong Tae-se',position:'FW',rating:72},{name:'Hong Yong-jo',position:'MF',rating:70}]},{name:'Uruguay 1930',tier:'A',power:90,players:[{name:'Castro',position:'FW',rating:88},{name:'Scarone',position:'FW',rating:90}]},{name:'Italy 1934',tier:'A',power:90,players:[{name:'Meazza',position:'FW',rating:96},{name:'Ferraris',position:'MF',rating:88}]},{name:'Italy 1938',tier:'A',power:91,players:[{name:'Piola',position:'FW',rating:95},{name:'Meazza',position:'FW',rating:96}]},{name:'Hungary 1954',tier:'A',power:93,players:[{name:'Puskas',position:'FW',rating:99},{name:'Kocsis',position:'FW',rating:97}]},{name:'Brazil 1958',tier:'S',power:97,players:[{name:'Pele',position:'FW',rating:99},{name:'Garrincha',position:'FW',rating:99}]},{name:'Brazil 1962',tier:'S',power:96,players:[{name:'Garrincha',position:'FW',rating:100},{name:'Amarildo',position:'FW',rating:92}]},{name:'Argentina 1978',tier:'A',power:90,players:[{name:'Kempes',position:'FW',rating:96},{name:'Passarella',position:'DF',rating:91}]},{name:'Italy 1982',tier:'A',power:91,players:[{name:'Rossi',position:'FW',rating:96},{name:'Zoff',position:'GK',rating:92}]},{name:'West Germany 1990',tier:'A',power:90,players:[{name:'Matthaus',position:'MF',rating:97},{name:'Klinsmann',position:'FW',rating:92}]},{name:'Brazil 1994',tier:'A',power:91,players:[{name:'Romario',position:'FW',rating:99},{name:'Bebeto',position:'FW',rating:94}]},{name:'Netherlands 2010',tier:'A',power:89,players:[{name:'Sneijder',position:'MF',rating:94},{name:'Robben',position:'FW',rating:96}]},{name:'Croatia 2022',tier:'B',power:87,players:[{name:'Modric',position:'MF',rating:97},{name:'Gvardiol',position:'DF',rating:89}]},
+// S Tier
+{name:'Brazil 1970',tier:'S',power:98,players:[['Pele',100],['Jairzinho',98],['Rivelino',97],['Carlos Alberto',96]]},
+{name:'Argentina 1986',tier:'S',power:97,players:[['Maradona',100],['Valdano',92],['Burruchaga',91]]},
+{name:'Spain 2010',tier:'S',power:96,players:[['Xavi',99],['Iniesta',100],['Villa',97],['Ramos',96]]},
+{name:'Argentina 2022',tier:'S',power:96,players:[['Messi',100],['Di Maria',94],['Alvarez',92]]},
+
+// A Tier
+{name:'Brazil 2002',tier:'A',power:92,players:[['Ronaldo',100],['Ronaldinho',99],['Rivaldo',98],['Cafu',96]]},
+{name:'Germany 2014',tier:'A',power:92,players:[['Neuer',95],['Kroos',96],['Muller',94],['Lahm',94]]},
+{name:'France 1998',tier:'A',power:91,players:[['Zidane',99],['Henry',94],['Desailly',93]]},
+{name:'Italy 2006',tier:'A',power:90,players:[['Cannavaro',96],['Pirlo',95],['Buffon',96]]},
+{name:'Netherlands 1974',tier:'A',power:90,players:[['Cruyff',99],['Neeskens',93]]},
+{name:'France 2018',tier:'A',power:91,players:[['Mbappe',98],['Griezmann',93],['Kante',94]]},
+
+// B Tier
+{name:'USA 2002',tier:'B',power:84,players:[['Donovan',85],['McBride',83],['Reyna',84]]},
+{name:'South Korea 2002',tier:'B',power:85,players:[['Park Ji-sung',88],['Ahn',84],['Lee Young-pyo',84]]},
+{name:'Croatia 1998',tier:'B',power:86,players:[['Suker',90],['Boban',87]]},
+{name:'Mexico 1986',tier:'B',power:84,players:[['Hugo Sanchez',89],['Negrete',86]]},
+{name:'Belgium 2018',tier:'B',power:87,players:[['Hazard',92],['De Bruyne',96],['Lukaku',91]]},
+{name:'England 1990',tier:'B',power:85,players:[['Lineker',90],['Gascoigne',89]]},
+{name:'Portugal 2006',tier:'B',power:86,players:[['Figo',92],['Deco',89],['Cristiano Ronaldo',91]]},
+
+// C Tier
+{name:'Japan 1998',tier:'C',power:77,players:[['Nakata',83],['Kawaguchi',76]]},
+{name:'Saudi Arabia 1994',tier:'C',power:76,players:[['Al-Owairan',86],['Al-Jaber',80]]},
+{name:'Nigeria 1994',tier:'C',power:79,players:[['Yekini',84],['Amokachi',82]]},
+{name:'Australia 2006',tier:'C',power:78,players:[['Kewell',84],['Viduka',83]]},
+{name:'Ireland 2002',tier:'C',power:78,players:[['Keane',88],['Duff',82]]},
+{name:'Morocco 1998',tier:'C',power:79,players:[['Hadji',82],['Bassir',80]]},
+
+// D Tier
+{name:'China 2002',tier:'D',power:68,players:[['Li Tie',71],['Fan Zhiyi',72]]},
+{name:'Zaire 1974',tier:'D',power:62,players:[['Kazadi',66],['Mwepu',65]]},
+{name:'Canada 1986',tier:'D',power:67,players:[['Mitchell',70],['Valentine',68]]},
+{name:'Bolivia 1994',tier:'D',power:69,players:[['Sanchez',72],['Etcheverry',74]]},
+{name:'Togo 2006',tier:'D',power:70,players:[['Adebayor',79],['Agassa',68]]}
 ];
+
+function weightedRandomTeam(){
+  const r = Math.random()*100;
+  let pool;
+  if(r < 5) pool = teams.filter(t=>t.tier==='S');
+  else if(r < 25) pool = teams.filter(t=>t.tier==='A');
+  else if(r < 60) pool = teams.filter(t=>t.tier==='B');
+  else if(r < 85) pool = teams.filter(t=>t.tier==='C');
+  else pool = teams.filter(t=>t.tier==='D');
+  return pool[Math.floor(Math.random()*pool.length)];
+}
